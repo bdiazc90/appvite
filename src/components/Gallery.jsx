@@ -1,42 +1,28 @@
-import hornedBeasts from "../consts/hornedBeast.json";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { Container, Row } from 'react-bootstrap';
+// import CardColumns from 'react-bootstrap/CardColumns';
+import HornedBeast from './HornedBeast';
 
-const HornedBeast = (props) => {
-    return (
-        <>
-            <article>
-                <h2>{props.title}</h2>
-                <p>{props.description}</p>
-                <img alt={props.title} src={props.image_url} />
-                <p>{props.description}</p>
-            </article>
-        </>
-    );
-};
+function Gallery(props) {
 
-const Gallery = () => {
-    return (
-        <>
-            <HornedBeast
-                title="Alex"
-                description="tengo 28"
-                image_url="https://placehold.co/200x200"
-            />
-            <HornedBeast
-                title="Bruno"
-                description="tengo 33"
-                image_url="https://placehold.co/200x200"
-            />
+  return (
+    <Container id="beast-container">
+      <Row xs={1} md={3}>
+        {props.allBeasts.map((beast, idx) => (
+          <HornedBeast
+            key={idx}
+            index={idx}
+            image_url={beast.image_url}
+            title={beast.title}
+            description={beast.description}
+            displayAsModal={props.displayAsModal}
+          />
+        ))}
+      </Row>
 
-            {hornedBeasts.map((hornedBeast) => (
-                <HornedBeast
-                    key={hornedBeast._id}
-                    title={hornedBeast.title}
-                    image_url={hornedBeast.image_url}
-                    description={hornedBeast.description}
-                />
-            ))}
-        </>
-    );
-};
+    </Container>
+  );
+}
 
 export default Gallery;
